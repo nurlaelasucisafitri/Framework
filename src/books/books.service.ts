@@ -21,20 +21,21 @@ export class BooksService {
     }
 
     // menyimpan data buku baru
-    create(book: CreateBookDto ): Book{
+
+    private nextId = 2;
+
+    create(dto: CreateBookDto): Book {
         const newBook: Book = {
-            id: this.books.length = 1,
-            title: 'The Greatt Gaby',
-            author: 'F, Scott Fitzgerald',
-            isbn: '97878099754567',
-            publishedYear: 1925,
+            id: this.nextId++,
+            title: dto.title,
+            author: dto.author,
+            isbn: dto.isbn,
+            publishedYear: dto.publishedYear,
             isAvailable: true,
-        }
+        };
 
         // simpan ke database
         this.books.push(newBook);
-
         return newBook;
-        
     }
 }
