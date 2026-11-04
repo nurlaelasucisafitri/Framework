@@ -7,6 +7,16 @@ import { BooksModule } from './books/books.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { LogMiddlewareMiddleware } from './middlewares/log-middleware/log-middleware.middleware.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module.js';
+import { AuthorsModule } from './authors/authors.module.js';
+import { CategoriesModule } from './categories/categories.module.js';
+import { PublishersModule } from './publishers/publishers.module.js';
+import { CustomersModule } from './customers/customers.module.js';
+import { CustomerAddressesModule } from './customer-addresses/customer-addresses.module.js';
+import { BookAuthorsModule } from './book-authors/book-authors.module.js';
+import { OrdersModule } from './orders/orders.module.js';
+import { PaymentsModule } from './payments/payments.module.js';
+import { ShipmentsModule } from './shipments/shipments.module.js';
 
 @Module({
   imports: [
@@ -32,17 +42,37 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get<string>('DB_HOST'),
-        post: configService.get<number>('DB_PORT'),
-        username: configService.get<'string'>('DB_USERNAME'),
-        password: configService.get<'string'>('DB_PASSWORD'),
-        database: configService.get<'string'>('DB_DATABASE'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USERNAME'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_DATABASE'),
 
         //otomatis sync .entity ke table 
         autoLoadEntities: true,
 
         synchronize: configService.get<string>('NODE_ENV') === 'development'
       })
-    })
+    }),
+
+    UsersModule,
+
+    AuthorsModule,
+
+    CategoriesModule,
+
+    PublishersModule,
+
+    CustomersModule,
+
+    CustomerAddressesModule,
+
+    BookAuthorsModule,
+
+    OrdersModule,
+
+    PaymentsModule,
+
+    ShipmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
