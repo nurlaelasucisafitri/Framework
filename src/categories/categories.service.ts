@@ -34,6 +34,7 @@ export class CategoriesService {
         return await this.categoryRepository.save(newCategory);
     }
 
+    //mengubah data category berdasarkan id
     async update(id: string, dto: UpdateCategoryDto): Promise<Category> {
         const category = await this.findById(id);
 
@@ -46,6 +47,7 @@ export class CategoriesService {
         return await this.categoryRepository.save(updatedCategory);
     }
 
+    //menghapus data cattegory berdaserkan id
     async remove(id: string): Promise<{ message: string; deletedId: string }> {
         await this.findById(id);
 
